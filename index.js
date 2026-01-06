@@ -26,7 +26,7 @@ function Server_init ({proxy_port, backend_url,ttl}){
                         try {
                             const response = await axios({
                                 method : req.method,
-                                url:req.url
+                                url: `${backend_url}`
                             })
                             //2things
                             let body;
@@ -48,7 +48,9 @@ function Server_init ({proxy_port, backend_url,ttl}){
                             res.end(body);
                             
                         } catch (error) {
-                            
+                            console.error("Proxy Error:", error.message);
+                            res.writeHead(500);
+                            res.end("Internal Server Error"); 
                         }
                 
             });
