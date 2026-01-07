@@ -15,6 +15,7 @@ function Server_init ({proxy_port, backend_url,ttl}){
                                 res.writeHead(200,{
                                     "proxy_status":"HIT"
                                 })
+                                console.log(body);
                                 return res.end(body);
                             }
                             else{
@@ -44,6 +45,7 @@ function Server_init ({proxy_port, backend_url,ttl}){
                                 res.writeHead(response.status,{
                                     "proxy_status":"MISS"
                                 });
+                                console.log(body);
                             }
                             res.end(body);
                             

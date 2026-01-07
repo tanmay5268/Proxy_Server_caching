@@ -1,21 +1,14 @@
-const { Server_init } = require("./index");
-const { Command } = require("commander");
-
-const program = new Command();
-
-program.name("cache-proxy")
-    .description("CLI-based Caching proxy server")
-    .requiredOption("-p,--port <number>", "Port to run proxy on")
-    .requiredOption("-o,--origin <url>", "Origin server URL")
-    .option("--ttl <seconds>", "Cache TTL in seconds", "60");
+const {Server_init} = require('./index.js')
+const { Command } = require('commander');
+const program = new Command()
+program
+    .name('CLI for proxy arguments')
+    .requiredOption('-p, --port <number>','port for proxy server')
+    .requiredOption('-b, --url <url>','backend_url')
+    .option('--ttl <number>','time for caching','60')
 
 program.parse(process.argv);
 
 const options = program.opts();
 
-
-Server_init({
-    proxy_port: Number(options.port),
-    backend_url: options.origin,
-    ttl: Number(options.ttl),
-});
+Server_init({ proxy_port:Number(options.port), backend_url:options.url, ttl:Number(options.ttl) })
